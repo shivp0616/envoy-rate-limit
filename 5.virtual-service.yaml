@@ -1,0 +1,18 @@
+---
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+#   labels:
+#     type: external
+  name: app-external
+  namespace: demo-app
+spec:
+  gateways:
+  - app-gateway.demo-app.svc.cluster.local
+  hosts:
+  - "*"
+  http:
+  - route:
+      - destination:
+          host: flask-app-service.demo-app.svc.cluster.local
+    timeout: 60s
